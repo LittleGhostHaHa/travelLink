@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>厦门集美文创园及周边游玩攻略</title>
+    <title>厦门集美一日游行程规划</title>
+    <!-- 引入高德地图API -->
+    <script src="https://webapi.amap.com/maps?v=2.0&key=7bd4febada1198edcc6fefc1b9c308a1"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5.12.8/dist/reset.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -18,6 +20,7 @@
             line-height: 1.6;
             color: #333;
             background-color: #f5f5f5;
+            font-size: 16px;
         }
         
         .container {
@@ -40,6 +43,7 @@
             font-size: 2.5em;
             color: #1890ff;
             margin-bottom: 10px;
+            line-height: 1.2;
         }
         
         .subtitle {
@@ -75,40 +79,112 @@
         
         .overview-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
             margin-bottom: 30px;
         }
         
         .overview-card {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border-left: 4px solid #1890ff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background-color: rgba(24, 144, 255, 0.05);
+            border-radius: 0 0 0 60px;
             transition: transform 0.3s ease;
         }
         
         .overview-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(24, 144, 255, 0.15);
+        }
+        
+        .overview-card:hover::before {
+            transform: scale(1.5);
+        }
+        
+        /* 为每个卡片添加不同的左侧边框颜色 */
+        .overview-card:nth-child(1) {
+            border-left-color: #1890ff;
+        }
+        
+        .overview-card:nth-child(2) {
+            border-left-color: #52c41a;
+        }
+        
+        .overview-card:nth-child(3) {
+            border-left-color: #faad14;
+        }
+        
+        .overview-card:nth-child(4) {
+            border-left-color: #f5222d;
         }
         
         .card-icon {
-            font-size: 2em;
-            margin-bottom: 15px;
+            font-size: 2.2em;
+            margin-bottom: 18px;
+            color: #1890ff;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 为每个卡片的图标设置不同颜色 */
+        .overview-card:nth-child(1) .card-icon {
             color: #1890ff;
         }
         
+        .overview-card:nth-child(2) .card-icon {
+            color: #52c41a;
+        }
+        
+        .overview-card:nth-child(3) .card-icon {
+            color: #faad14;
+        }
+        
+        .overview-card:nth-child(4) .card-icon {
+            color: #f5222d;
+        }
+        
         .card-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .overview-card p {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.6;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            flex-grow: 1;
         }
         
         .schedule-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
+            overflow-x: auto;
+            display: block;
         }
         
         .schedule-table th,
@@ -116,6 +192,7 @@
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #e8e8e8;
+            white-space: nowrap;
         }
         
         .schedule-table th {
@@ -246,6 +323,161 @@
             border-top: 1px solid #e8e8e8;
         }
         
+        /* 响应式设计 - 针对移动设备 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .container {
+                padding: 15px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            header {
+                padding: 20px 0;
+                margin-bottom: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+                margin-bottom: 15px;
+            }
+            
+            .overview-cards {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .overview-card {
+                padding: 18px;
+                border-radius: 10px;
+            }
+            
+            .card-icon {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            
+            .card-title {
+                font-size: 1.2em;
+            }
+            
+            .section-header {
+                margin-bottom: 20px;
+            }
+            
+            .section-subtitle {
+                font-size: 0.9em;
+            }
+            
+            .map-container {
+                height: 300px;
+                margin-bottom: 20px;
+            }
+            
+            .attractions {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .attraction-card {
+                max-width: 100%;
+            }
+            
+            .attraction-img {
+                height: 180px;
+            }
+            
+            .attraction-info {
+                padding: 15px;
+            }
+            
+            .attraction-name {
+                font-size: 1.2em;
+            }
+            
+            .attraction-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .tips {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            section {
+            margin-bottom: 30px;
+        }
+        
+        .section-header {
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #1890ff;
+            margin-bottom: 8px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f4fd;
+        }
+        
+        .section-subtitle {
+            color: #666;
+            font-size: 1em;
+            margin: 0;
+            padding-left: 2px;
+        }
+            
+            footer {
+                padding: 20px 0;
+            }
+        }
+        
+        /* 响应式设计 - 针对超小型手机 */
+        @media (max-width: 480px) {
+            .overview-cards {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .overview-card {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .weather-info {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            
+            .map-container {
+                height: 250px;
+            }
+            
+            .schedule-table th,
+            .schedule-table td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
+        
         @media print {
             body {
                 background-color: #fff;
@@ -280,8 +512,11 @@
             </div>
         </header>
         
-        <section id="overview">
-            <h2>行程概览</h2>
+        <section id="overview" class="section-overview">
+            <div class="section-header">
+                <h2 class="section-title">行程概览</h2>
+                <p class="section-subtitle">快速了解行程关键信息</p>
+            </div>
             <div class="overview-cards">
                 <div class="overview-card">
                     <div class="card-icon">📍</div>
@@ -296,12 +531,12 @@
                 <div class="overview-card">
                     <div class="card-icon">🚶</div>
                     <div class="card-title">交通方式</div>
-                    <p>文创园停车场停车后游览</p>
+                    <p>文创园停车场停车后全程步行游览</p>
                 </div>
                 <div class="overview-card">
                     <div class="card-icon">🍽️</div>
                     <div class="card-title">用餐安排</div>
-                    <p>集美学村周边特色美食</p>
+                    <p>集美学村周边特色美食，推荐品尝沙茶面</p>
                 </div>
             </div>
         </section>
@@ -320,13 +555,13 @@
                 <tbody>
                     <tr>
                         <td>17:00-17:10</td>
-                        <td class="location">集美集影视文创园停车场</td>
+                        <td class="location">1. 集美集影视文创园停车场</td>
                         <td class="activity">抵达并停车</td>
                         <td>建议提前查找停车位</td>
                     </tr>
                     <tr>
                         <td>17:10-18:00</td>
-                        <td class="location">集美集影视文创园</td>
+                        <td class="location">1. 集美集影视文创园</td>
                         <td class="activity">参观文创园区</td>
                         <td>游览Doka宠物友好咖啡、LAN书店等文创业态</td>
                     </tr>
@@ -338,7 +573,7 @@
                     </tr>
                     <tr>
                         <td>18:15-19:00</td>
-                        <td class="location">集美学村</td>
+                        <td class="location">2. 集美学村（道南楼、南薰楼附近）</td>
                         <td class="activity">游览+晚餐</td>
                         <td>品尝当地特色美食，如沙茶面、海蛎煎等</td>
                     </tr>
@@ -350,13 +585,13 @@
                     </tr>
                     <tr>
                         <td>19:15-20:00</td>
-                        <td class="location">大社</td>
+                        <td class="location">3. 大社</td>
                         <td class="activity">游览大社</td>
                         <td>体验闽南传统村落风情，欣赏古建筑夜景</td>
                     </tr>
                     <tr>
                         <td>20:00-20:30</td>
-                        <td class="location">文创园停车场</td>
+                        <td class="location">1. 文创园停车场</td>
                         <td class="activity">返回文创园开车</td>
                         <td>步行返回文创园停车场，结束行程</td>
                     </tr>
@@ -375,9 +610,9 @@
             <h2>景点介绍</h2>
             <div class="attractions">
                 <div class="attraction-card">
-                    <img src="https://picsum.photos/id/163/800/400" alt="集美集影视文创园" class="attraction-img">
+                    <img src="https://picsum.photos/id/163/800/400" alt="集美集影视文创园" class="attraction-img" style="object-fit: cover; height: 200px;">
                     <div class="attraction-info">
-                        <div class="attraction-name">集美集影视文创园</div>
+                        <div class="attraction-name">1. 集美集影视文创园</div>
                         <div class="attraction-desc">前身是集美大学精工实习基地，以纯白色建筑和灰色道路为主，文艺清新风格。这里有多家特色咖啡店、书店和创意工坊，是《开端》《猎罪图鉴》等多部影视剧的取景地。</div>
                         <div class="attraction-meta">
                             <span>开放时间：09:00-18:00</span>
@@ -387,9 +622,9 @@
                 </div>
                 
                 <div class="attraction-card">
-            <img src="https://picsum.photos/id/65/800/400" alt="集美学村" class="attraction-img">
+                    <img src="https://picsum.photos/id/65/800/600" alt="集美学村" class="attraction-img" style="object-fit: cover; height: 200px;">
             <div class="attraction-info">
-                <div class="attraction-name">集美学村</div>
+                <div class="attraction-name">2. 集美学村（道南楼、南薰楼附近）</div>
                 <div class="attraction-desc">由爱国华侨陈嘉庚先生创办，以"穿西装、戴斗笠"的嘉庚建筑风格著称。道南楼采用闽南细白花岗岩与红砖搭配，上部为中式二重飞檐，下部融合西洋拱门花窗；南薰楼为标志性建筑，直冲霄汉。</div>
                         <div class="attraction-meta">
                             <span>开放时间：全天</span>
@@ -399,9 +634,9 @@
                 </div>
                 
                 <div class="attraction-card">
-                    <img src="https://picsum.photos/id/225/800/400" alt="大社" class="attraction-img">
+                    <img src="https://picsum.photos/id/225/800/600" alt="大社" class="attraction-img" style="object-fit: cover; height: 200px;">
                     <div class="attraction-info">
-                        <div class="attraction-name">大社</div>
+                        <div class="attraction-name">3. 大社</div>
                         <div class="attraction-desc">大社是厦门最古老的村落之一，至今已有700多年历史。这里保存完好的传统闽南建筑群以红砖白墙和燕尾脊为特色，古厝、祠堂错落有致地分布在窄窄的石板巷弄间，处处彰显着闽南建筑的独特魅力。漫步其中，仿佛穿越时空，体验最原汁原味的闽南生活气息。</div>
                         <div class="attraction-meta">
                             <span>全天开放</span>
@@ -443,114 +678,210 @@
     </div>
     
     
-    <!-- 初始化高德地图 -->
+    <!-- 引入高德地图API，移到head部分 -->
+    
+    <!-- 地图初始化脚本 -->
     <script>
-        window.onload = function() {
-            // 使用示例API密钥（实际使用时请替换为您自己的密钥）
-            const map = new AMap.Map('map', {
-                zoom: 14,
-                center: [118.095, 24.568], // 调整中心位置以更好地显示所有景点
-                viewMode: '3D',
-                buildingAnimation: true
+        // 直接在DOM加载完成后初始化地图
+        document.addEventListener('DOMContentLoaded', function() {
+            // 确保AMap已加载
+            if (typeof AMap === 'undefined') {
+                console.error('高德地图API未加载');
+                // 显示备用内容
+                document.getElementById('map').innerHTML = 
+                    '<div style="display: flex; align-items: center; justify-content: center; height: 100%; background-color: #f5f5f5; color: #333;">' +
+                    '<div style="text-align: center;">' +
+                    '<h3>行程路线图</h3>' +
+                    '<p>游览顺序：</p>' +
+                    '<ol style="text-align: left; display: inline-block;">' +
+                    '<li>集美集影视文创园（起点）</li>' +
+                    '<li>集美学村</li>' +
+                    '<li>大社</li>' +
+                    '<li>返回集美集影视文创园（终点）</li>' +
+                    '</ol>' +
+                    '</div>' +
+                    '</div>';
+                return;
+            }
+            
+            // 创建地图实例 - 使用标准地图样式
+            var map = new AMap.Map('map', {
+                zoom: 15,
+                center: [118.1015, 24.575], // 调整中心点覆盖全部路线
+                resizeEnable: true,
+                viewMode: '2D',
+                showLabel: true
             });
             
-            // 添加控件
-            map.addControl(new AMap.ToolBar());
-            map.addControl(new AMap.Scale());
+            // 添加优化的自定义标记 - 使用更醒目的图标
+            var marker1 = new AMap.Marker({
+                position: [118.098497, 24.580102],
+                title: '集美集影视文创园',
+                icon: new AMap.Icon({
+                    size: new AMap.Size(40, 50),
+                    image: 'https://webapi.amap.com/theme/v1.3/markers/b/start.png',
+                    imageSize: new AMap.Size(40, 50),
+                    imageOffset: new AMap.Pixel(0, -50) // 图标偏移，使底部对齐点
+                }),
+                map: map,
+                zIndex: 101
+            });
             
-            // 定义景点坐标（精简版）
-            const locations = [
-                {name: '集美集影视文创园', location: [118.098497, 24.580102], icon: '📍'},
-                {name: '集美学村', location: [118.092832, 24.566280], icon: '🏫'},
-                {name: '大社', location: [118.087921, 24.565843], icon: '🏘️'}
-            ];
+            // 修正集美学村的位置为更准确的坐标
+            var marker2 = new AMap.Marker({
+                position: [118.099071, 24.573546], // 更准确的集美学村位置
+                title: '集美学村',
+                icon: new AMap.Icon({
+                    size: new AMap.Size(40, 50),
+                    image: 'https://webapi.amap.com/theme/v1.3/markers/b/mark_b.png',
+                    imageSize: new AMap.Size(40, 50),
+                    imageOffset: new AMap.Pixel(0, -50)
+                }),
+                map: map,
+                zIndex: 101,
+                animation: 'AMAP_ANIMATION_BOUNCE' // 添加弹跳动画
+            });
             
-            // 添加标记
-            locations.forEach((item, index) => {
-                const marker = new AMap.Marker({
-                    position: item.location,
-                    title: item.name,
-                    map: map
-                });
-                
-                // 添加信息窗口
-                const infoWindow = new AMap.InfoWindow({
-                    content: `<h3>${item.icon} ${item.name}</h3>`,
-                    offset: new AMap.Pixel(0, -30)
+            var marker3 = new AMap.Marker({
+                position: [118.105858, 24.570348],
+                title: '大社',
+                icon: new AMap.Icon({
+                    size: new AMap.Size(40, 50),
+                    image: 'https://webapi.amap.com/theme/v1.3/markers/b/mark_y.png',
+                    imageSize: new AMap.Size(40, 50),
+                    imageOffset: new AMap.Pixel(0, -50)
+                }),
+                map: map,
+                zIndex: 101
+            });
+            
+            // 重新绘制所有路线，简化配置但确保明显可见
+            // 路线1：文创园到集美学村
+            var route1 = new AMap.Polyline({
+                path: [
+                    [118.098497, 24.580102],
+                    [118.099071, 24.573546]
+                ],
+                strokeColor: '#1890ff',
+                strokeWeight: 10,
+                strokeOpacity: 1,
+                strokeStyle: 'solid',
+                map: map
+            });
+            
+            // 路线2：集美学村到大社
+            var route2 = new AMap.Polyline({
+                path: [
+                    [118.099071, 24.573546],
+                    [118.101, 24.572],
+                    [118.103, 24.571],
+                    [118.105858, 24.570348] // 添加中间点确保路线平滑连接
+                ],
+                strokeColor: '#1890ff',
+                strokeWeight: 10,
+                strokeOpacity: 1,
+                strokeStyle: 'solid',
+                map: map
+            });
+            
+            // 路线3：大社返回文创园
+            var route3 = new AMap.Polyline({
+                path: [
+                    [118.105858, 24.570348],
+                    [118.103, 24.572],
+                    [118.100, 24.576],
+                    [118.098497, 24.580102] // 添加中间点确保路线平滑连接
+                ],
+                strokeColor: '#ff4d4f',
+                strokeWeight: 8,
+                strokeOpacity: 1,
+                strokeStyle: 'dashed',
+                strokeDasharray: [15, 10],
+                map: map
+            });
+            
+            // 添加优化的文字标签 - 使用更现代的样式
+            var label1 = new AMap.Label({
+                position: [118.098497, 24.580102],
+                content: '<div style="background-color: #52c41a; color: white; padding: 8px 12px; border-radius: 4px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); font-size: 14px;">1. 集美集影视文创园（起点）</div>',
+                offset: new AMap.Pixel(5, -60), // 调整偏移量以适应更大的图标
+                map: map,
+                zIndex: 102
+            });
+            
+            var label2 = new AMap.Label({
+                position: [118.099071, 24.573546],
+                content: '<div style="background-color: #1890ff; color: white; padding: 8px 12px; border-radius: 4px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); font-size: 14px;">2. 集美学村（道南楼、南薰楼附近）</div>',
+                offset: new AMap.Pixel(5, -60),
+                map: map,
+                zIndex: 102
+            });
+            
+            var label3 = new AMap.Label({
+                position: [118.105858, 24.570348],
+                content: '<div style="background-color: #fa8c16; color: white; padding: 8px 12px; border-radius: 4px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2); font-size: 14px;">3. 大社</div>',
+                offset: new AMap.Pixel(5, -60),
+                map: map,
+                zIndex: 102
+            });
+            
+            // 添加优化的路线说明
+            var legend = new AMap.Label({
+                position: [118.09, 24.585],
+                content: '<div style="background-color: white; padding: 12px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-size: 14px; border: 1px solid #f0f0f0;">' +
+                        '<div style="margin-bottom: 8px; font-weight: bold; color: #333; font-size: 16px;">路线说明：</div>' +
+                        '<div style="display: flex; align-items: center; margin-bottom: 8px;">' +
+                        '<div style="width: 40px; height: 4px; background-color: #1890ff; margin-right: 8px;"></div>' +
+                        '<span style="color: #666;">游览路线（实线）</span></div>' +
+                        '<div style="display: flex; align-items: center;">' +
+                        '<div style="width: 40px; height: 4px; background-color: #ff4d4f; border-style: dashed; border-width: 2px; margin-right: 8px;"></div>' +
+                        '<span style="color: #666;">返回路线（虚线）</span></div>' +
+                        '</div>',
+                map: map,
+                zIndex: 102
+            });
+            
+            // 添加交互效果 - 鼠标悬停显示详细信息
+            function addMarkerInfoWindow(marker, title, desc) {
+                var infoWindow = new AMap.InfoWindow({
+                    content: '<div style="padding: 10px;">' +
+                             '<h3 style="margin-top: 0; margin-bottom: 10px; color: #1890ff;">' + title + '</h3>' +
+                             '<p style="margin: 0; line-height: 1.6;">' + desc + '</p>' +
+                             '</div>',
+                    offset: new AMap.Pixel(0, -50)
                 });
                 
                 marker.on('click', function() {
                     infoWindow.open(map, marker.getPosition());
                 });
-            });
+            }
             
-            // 绘制路线 - 环形路线（从文创园出发，游览后返回）
-            const routePath = [
-                new AMap.LngLat(118.098497, 24.580102), // 集美集影视文创园（起点）
-                new AMap.LngLat(118.092832, 24.566280), // 集美学村
-                new AMap.LngLat(118.087921, 24.565843), // 大社
-                new AMap.LngLat(118.098497, 24.580102)  // 返回文创园（终点）
-            ];
+            // 为每个标记添加信息窗口
+            addMarkerInfoWindow(marker1, '1. 集美集影视文创园', '文创园占地面积广阔，内有众多创意工作室、艺术展览和特色商店，是拍照打卡的理想场所。园区内还保留了许多工业风格的建筑。');
+            addMarkerInfoWindow(marker2, '2. 集美学村', '集美学村是由著名爱国华侨陈嘉庚先生创办的教育基地，拥有多所学校和独特的建筑风格，融合了中西文化元素。');
+            addMarkerInfoWindow(marker3, '3. 大社', '大社是厦门最古老的村落之一，保存完好的传统闽南建筑群以红砖白墙和燕尾脊为特色，古厝、祠堂错落有致。');
             
-            // 简化路线绘制，确保可见性
-            const polyline = new AMap.Polyline({
-                path: routePath,
-                strokeColor: '#FF0000', // 纯红色，最大可见性
-                strokeWeight: 10,       // 更粗的线宽
-                strokeOpacity: 1.0,     // 完全不透明
-                strokeStyle: 'solid',
-                map: map
-            });
+            // 调整地图视野，确保所有路线完整显示
+            // 首先设置一个合适的初始视野，覆盖所有景点
+            map.setZoomAndCenter(15, [118.101, 24.573]);
             
-            // 确保路线被添加到地图上
-            polyline.setMap(map);
+            // 然后在短暂延迟后调整视野，确保所有元素都可见
+            setTimeout(function() {
+                map.setFitView([marker1, marker2, marker3, route1, route2, route3], false, [120, 120, 120, 120]);
+            }, 300);
             
-            // 添加路线起点和终点标记
-            const startMarker = new AMap.Marker({
-                position: [118.098497, 24.580102], // 起点：集美集影视文创园
-                icon: new AMap.Icon({
-                    size: new AMap.Size(40, 40),
-                    imageSize: new AMap.Size(40, 40),
-                    content: '<div style="background-color: #52c41a; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">起</div>'
-                }),
-                map: map
-            });
+            // 为路线添加更明显的标识
+            // 在控制台记录所有路线信息，帮助调试
+            console.log('路线1坐标:', route1.getPath());
+            console.log('路线2坐标:', route2.getPath());
+            console.log('路线3坐标:', route3.getPath());
             
-            const endMarker = new AMap.Marker({
-                position: [118.087921, 24.565843], // 终点：大社
-                icon: new AMap.Icon({
-                    size: new AMap.Size(40, 40),
-                    imageSize: new AMap.Size(40, 40),
-                    content: '<div style="background-color: #ff4d4f; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">终</div>'
-                }),
-                map: map
-            });
+            // 添加地图控件
+            map.addControl(new AMap.Zoom());
+            map.addControl(new AMap.MapType());
             
-            // 调整视野，确保所有标记和路线可见
-            const bounds = new AMap.Bounds();
-            routePath.forEach(point => bounds.extend(point));
-            map.setBounds(bounds, false, [80, 80, 80, 80]);
-            
-            // 添加路线编号标记，确保用户能看到顺序
-            const labels = ['1️⃣', '2️⃣', '3️⃣', '🏁'];
-            const titles = ['起点: 集美集影视文创园', '2: 集美学村', '3: 大社', '终点: 返回文创园'];
-            
-            routePath.forEach((point, index) => {
-                new AMap.Marker({
-                    position: point,
-                    icon: new AMap.Icon({
-                        size: new AMap.Size(30, 30),
-                        imageSize: new AMap.Size(30, 30),
-                        content: `<div style="background-color: white; border: 2px solid #FF0000; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">${labels[index]}</div>`
-                    }),
-                    title: titles[index],
-                    map: map
-                });
-            });
-        };
+            console.log('地图初始化成功，所有标记和路线已添加');
+        });
     </script>
-    
-    <!-- 高德地图API -->
-    <script src="https://webapi.amap.com/maps?v=2.0&key=7bd4febada1198edcc6fefc1b9c308a1"></script>
 </body>
 </html>
