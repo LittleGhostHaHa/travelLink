@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厦门集美精选游玩攻略 - 打印版</title>
+    <style>
+        @media print {
+            body {
+                font-family: 'Microsoft YaHei', Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                margin: 0;
+                padding: 20px;
+            }
+            
+            .print-header {
+                text-align: center;
+                margin-bottom: 30px;
+                border-bottom: 3px solid #1890ff;
+                padding-bottom: 20px;
+            }
+            
+            .print-title {
+                font-size: 24px;
+                font-weight: bold;
+                color: #1890ff;
+                margin-bottom: 10px;
+            }
+            
+            .print-subtitle {
+                font-size: 16px;
+                color: #666;
+            }
+            
+            .section {
+                margin-bottom: 25px;
+                page-break-inside: avoid;
+            }
+            
+            .section-title {
+                font-size: 18px;
+                font-weight: bold;
+                color: #1890ff;
+                border-left: 4px solid #1890ff;
+                padding-left: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .overview-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .overview-card {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                text-align: center;
+                border: 1px solid #e9ecef;
+            }
+            
+            .card-icon {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+            
+            .card-title {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            
+            .schedule-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            
+            .schedule-table th,
+            .schedule-table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: left;
+            }
+            
+            .schedule-table th {
+                background: #f0f2f5;
+                font-weight: bold;
+            }
+            
+            .attraction-card {
+                display: flex;
+                margin-bottom: 20px;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            
+            .attraction-img {
+                width: 200px;
+                height: 150px;
+                object-fit: cover;
+            }
+            
+            .attraction-info {
+                flex: 1;
+                padding: 15px;
+            }
+            
+            .attraction-name {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 8px;
+                color: #1890ff;
+            }
+            
+            .tips ul {
+                margin: 0;
+                padding-left: 20px;
+            }
+            
+            .tips li {
+                margin-bottom: 8px;
+            }
+            
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #ddd;
+                color: #666;
+                font-size: 14px;
+            }
+            
+            .map-placeholder {
+                background: #f8f9fa;
+                border: 2px dashed #1890ff;
+                border-radius: 8px;
+                padding: 40px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .route-info {
+                background: #fff7e6;
+                border: 1px solid #ffd591;
+                border-radius: 8px;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-header">
+        <div class="print-title">厦门集美精选游玩攻略</div>
+        <div class="print-subtitle">行程日期：2025年10月18日 | 天气：晴朗 25°C</div>
+    </div>
+    
+    <div class="route-info">
+        <strong>行程路线：</strong>集美集影视文创园 → 集美学村 → 大社 → 返回文创园
+        <br><strong>总步行距离：</strong>约4公里 | <strong>总时长：</strong>3.5小时 (17:00-20:30)
+    </div>
+    
+    <div class="section">
+        <div class="section-title">行程概览</div>
+        <div class="overview-grid">
+            <div class="overview-card">
+                <div class="card-icon">📍</div>
+                <div class="card-title">景点数量</div>
+                <p>3个精选景点</p>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon">⏱️</div>
+                <div class="card-title">行程时间</div>
+                <p>17:00-20:30</p>
+            </div>
+            <div class="overview-card">
+                <div class="card-icon">🚶</div>
+                <div class="card-title">交通方式</div>
+                <p>文创园停车场停车后游览</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">详细时间表</div>
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>地点</th>
+                    <th>活动</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>17:00-17:30</td>
+                    <td>集美集影视文创园</td>
+                    <td>停车、游览文创园</td>
+                    <td>建议在文创园停车场停车</td>
+                </tr>
+                <tr>
+                    <td>17:30-19:15</td>
+                    <td>集美学村</td>
+                    <td>游览学村、晚餐</td>
+                    <td>可品尝当地特色美食</td>
+                </tr>
+                <tr>
+                    <td>19:15-20:00</td>
+                    <td>大社</td>
+                    <td>游览大社</td>
+                    <td>体验闽南传统村落风情，欣赏古建筑夜景</td>
+                </tr>
+                <tr>
+                    <td>20:00-20:30</td>
+                    <td>文创园停车场</td>
+                    <td>返回文创园开车</td>
+                    <td>步行返回文创园停车场，结束行程</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">路线地图</div>
+        <div style="text-align: center; margin: 20px 0;">
+            <iframe src="route_map.html" width="100%" height="600" style="border: 1px solid #ddd; border-radius: 8px;"></iframe>
+            <p style="margin-top: 10px; color: #666; font-size: 14px;">路线示意图：集美集影视文创园 → 集美学村 → 大社 → 返回文创园</p>
+            <p style="color: #666; font-size: 14px;">总距离：约4公里 | 步行时间：约3.5小时</p>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">景点介绍</div>
+        
+        <div class="attraction-card">
+                    <img src="https://picsum.photos/id/163/800/400" alt="集美集影视文创园" class="attraction-img">
+                    <div class="attraction-info">
+                        <div class="attraction-name">集美集影视文创园</div>
+                        <div class="attraction-desc">前身是集美大学精工实习基地，以纯白色建筑和灰色道路为主，文艺清新风格。这里有多家特色咖啡店、书店和创意工坊，是《开端》《猎罪图鉴》等多部影视剧的取景地。</div>
+                        <div><strong>开放时间：</strong>09:00-18:00 | <strong>门票：</strong>免费</div>
+                    </div>
+                </div>
+                
+                <div class="attraction-card">
+                    <img src="https://picsum.photos/id/65/800/400" alt="集美学村" class="attraction-img">
+                    <div class="attraction-info">
+                        <div class="attraction-name">集美学村</div>
+                        <div class="attraction-desc">由爱国华侨陈嘉庚先生创办，以"穿西装、戴斗笠"的嘉庚建筑风格著称。道南楼采用闽南细白花岗岩与红砖搭配，上部为中式二重飞檐，下部融合西洋拱门花窗；南薰楼为标志性建筑，直冲霄汉。</div>
+                        <div><strong>开放时间：</strong>全天开放 | <strong>门票：</strong>免费</div>
+                    </div>
+                </div>
+                
+                <div class="attraction-card">
+                    <img src="https://picsum.photos/id/225/800/400" alt="大社" class="attraction-img">
+                    <div class="attraction-info">
+                        <div class="attraction-name">大社</div>
+                        <div class="attraction-desc">大社是厦门最古老的村落之一，至今已有700多年历史。这里保存完好的传统闽南建筑群以红砖白墙和燕尾脊为特色，古厝、祠堂错落有致地分布在窄窄的石板巷弄间，处处彰显着闽南建筑的独特魅力。漫步其中，仿佛穿越时空，体验最原汁原味的闽南生活气息。</div>
+                        <div><strong>开放时间：</strong>全天开放 | <strong>门票：</strong>免费</div>
+                    </div>
+                </div>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">实用信息</div>
+        
+        <div class="tips">
+            <h3>出行小贴士</h3>
+            <ul>
+                <li>建议穿着舒适的鞋子，全程以步行为主，总步行距离约4公里</li>
+                <li>傍晚时分可能较为闷热，建议携带防晒用品和饮用水</li>
+                <li>集美学村周边美食众多，可品尝沙茶面、海蛎煎等当地特色</li>
+                <li>文创园内有多家特色咖啡店，可作为休息打卡点</li>
+                <li>大社内有许多文创小店和特色咖啡馆，晚上气氛更佳，值得细细品味</li>
+                <li>夏季蚊虫较多，建议携带防蚊液</li>
+            </ul>
+        </div>
+        
+        <div class="tips">
+            <h3>紧急联系</h3>
+            <ul>
+                <li>紧急救援：120</li>
+                <li>报警电话：110</li>
+                <li>消防电话：119</li>
+                <li>厦门市旅游咨询热线：0592-5318985</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 厦门集美精选游玩攻略 | 制作：J.I.E</p>
+        <p>打印时间：<span id="print-time"></span></p>
+    </div>
+    
+    <script>
+        // 设置打印时间
+        document.getElementById('print-time').textContent = new Date().toLocaleString('zh-CN');
+        
+        // 页面加载后自动触发打印对话框
+        window.onload = function() {
+            setTimeout(function() {
+                window.print();
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
