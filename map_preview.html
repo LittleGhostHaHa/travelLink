@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路线地图预览</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .map-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+        }
+        .header {
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        h1 {
+            margin: 0;
+            color: #333;
+        }
+    </style>
+    <!-- 高德地图API -->
+    <script src="https://webapi.amap.com/maps?v=2.0&key=7bd4febada1198edcc6fefc1b9c308a1"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>厦门集美文创园及周边路线地图预览</h1>
+    </div>
+    <div class="map-container">
+        <div id="map" style="width: 100%; height: 100%;"></div>
+    </div>
+
+    <script>
+        // 确保DOM加载完成且高德地图API可用
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查AMap是否已加载
+            if (typeof AMap === 'undefined') {
+                console.error('高德地图API加载失败');
+                alert('高德地图API加载失败，请刷新页面重试');
+                return;
+            }
+            
+            // 初始化地图
+            const map = new AMap.Map('map', {
+                zoom: 15,
+                center: [118.095, 24.568],
+                viewMode: '3D',
+                buildingAnimation: true,
+                resizeEnable: true
+            });
+            
+            // 添加控件
+            map.addControl(new AMap.ToolBar());
+            map.addControl(new AMap.Scale());
+            
+            // 定义景点坐标
+            const locations = [
+                {name: '集美集影视文创园', location: [118.098497, 24.580102], icon: '📍'},
+                {name: '集美学村', location: [118.092832, 24.566280], icon: '🏫'},
+                {name: '大社', location: [118.087921, 24.565843], icon: '🏘️'}
+            ];
+            
+            // 添加景点标记
+            locations.forEach((item) => {
+                const marker = new AMap.Marker({
+                    position: item.location,
+                    title: item.name,
+                    icon: new AMap.Icon({
+                        size: new AMap.Size(36, 36),
+                        imageSize: new AMap.Size(36, 36),
+                        content: `<div style="font-size: 24px; text-align: center;">${item.icon}</div>`
+                    }),
+                    map: map
+                });
+                
+                // 添加信息窗口
+                const infoWindow = new AMap.InfoWindow({
+                    content: `<div style="padding: 10px;"><h3 style="margin: 0;">${item.icon} ${item.name}</h3></div>`,
+                    offset: new AMap.Pixel(0, -30)
+                });
+                
+                marker.on('click', function() {
+                    infoWindow.open(map, marker.getPosition());
+                });
+            });
+            
+            // 定义路线坐标
+            const routePath = [
+                new AMap.LngLat(118.098497, 24.580102), // 集美集影视文创园（起点）
+                new AMap.LngLat(118.092832, 24.566280), // 集美学村
+                new AMap.LngLat(118.087921, 24.565843), // 大社
+                new AMap.LngLat(118.098497, 24.580102)  // 返回文创园（终点）
+            ];
+            
+            // 绘制路线
+            const polyline = new AMap.Polyline({
+                path: routePath,
+                strokeColor: '#1890ff',
+                strokeWeight: 6,
+                strokeOpacity: 0.8,
+                strokeStyle: 'solid',
+                zIndex: 100
+            });
+            
+            // 添加路线到地图
+            polyline.setMap(map);
+            
+            // 添加起点标记
+            const startMarker = new AMap.Marker({
+                position: [118.098497, 24.580102],
+                icon: new AMap.Icon({
+                    size: new AMap.Size(40, 40),
+                    imageSize: new AMap.Size(40, 40),
+                    content: '<div style="background-color: #52c41a; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">起</div>'
+                }),
+                zIndex: 200,
+                map: map
+            });
+            
+            // 添加路线步骤标记
+            const waypoints = [
+                {position: [118.098497, 24.580102], label: '1', title: '起点: 集美集影视文创园'},
+                {position: [118.092832, 24.566280], label: '2', title: '集美学村'},
+                {position: [118.087921, 24.565843], label: '3', title: '大社'}
+            ];
+            
+            waypoints.forEach((point) => {
+                new AMap.Marker({
+                    position: point.position,
+                    icon: new AMap.Icon({
+                        size: new AMap.Size(30, 30),
+                        imageSize: new AMap.Size(30, 30),
+                        content: `<div style="background-color: #1890ff; border: 2px solid white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">${point.label}</div>`
+                    }),
+                    title: point.title,
+                    zIndex: 150,
+                    map: map
+                });
+            });
+            
+            // 调整视野
+            const bounds = new AMap.Bounds();
+            routePath.forEach(point => bounds.extend(point));
+            map.setBounds(bounds, false, [50, 50, 50, 50]);
+            
+            // 添加路线图例
+            const legend = document.createElement('div');
+            legend.style.position = 'absolute';
+            legend.style.bottom = '20px';
+            legend.style.right = '20px';
+            legend.style.backgroundColor = 'white';
+            legend.style.padding = '10px';
+            legend.style.borderRadius = '5px';
+            legend.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+            legend.style.zIndex = '1000';
+            legend.style.fontSize = '12px';
+            legend.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <div style="background-color: #1890ff; width: 20px; height: 3px; margin-right: 5px;"></div>
+                    <span>游览路线</span>
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                    <div style="background-color: #52c41a; width: 15px; height: 15px; border-radius: 50%; margin-right: 5px;"></div>
+                    <span>起点</span>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <div style="background-color: #1890ff; width: 15px; height: 15px; border-radius: 50%; margin-right: 5px;"></div>
+                    <span>游览点</span>
+                </div>
+            `;
+            document.getElementById('map').appendChild(legend);
+            
+            console.log('地图初始化完成，路线已显示');
+        });
+    </script>
+</body>
+</html>

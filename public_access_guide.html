@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行行程 - 外网访问指南</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #1a73e8;
+        }
+        .method {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+        }
+        .step {
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background: #1a73e8;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+        .tip {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #17a2b8;
+            margin: 15px 0;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>旅行行程 - 外网访问指南</h1>
+    
+    <div class="tip">
+        本指南提供多种方法，帮助您将本地运行的旅行行程网页分享给他人访问。请选择适合您的方法。
+    </div>
+    
+    <div class="method">
+        <h2>方法一：使用 ngrok（推荐）</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span> 访问 <a href="https://ngrok.com/download" target="_blank">ngrok官网</a> 下载适合您系统的版本
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span> 解压下载的文件，找到 ngrok 可执行文件
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span> 打开新的命令行窗口，运行以下命令（确保当前本地服务器已在端口8000运行）：
+            <pre>ngrok http 8000</pre>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">4</span> 运行成功后，ngrok 会显示类似这样的信息：
+            <pre>Forwarding                    http://1a2b3c4d.ngrok.io -> http://localhost:8000</pre>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">5</span> 将生成的外网链接（如 http://1a2b3c4d.ngrok.io）分享给他人
+        </div>
+        
+        <div class="success">
+            ✅ 他人访问该链接时，会自动跳转到您本地的旅行行程网页
+        </div>
+    </div>
+    
+    <div class="method">
+        <h2>方法二：使用 localtunnel</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span> 确保已安装 Node.js（如未安装，可从 <a href="https://nodejs.org/" target="_blank">官网</a> 下载）
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span> 打开命令行窗口，安装 localtunnel：
+            <pre>npm install -g localtunnel</pre>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span> 确保本地服务器已在端口8000运行，然后运行：
+            <pre>lt --port 8000</pre>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">4</span> 运行成功后，localtunnel 会显示类似这样的信息：
+            <pre>your url is: https://random-name.loca.lt</pre>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">5</span> 将生成的外网链接分享给他人
+        </div>
+    </div>
+    
+    <div class="method">
+        <h2>方法三：部署到 GitHub Pages</h2>
+        
+        <div class="step">
+            <span class="step-number">1</span> 在 GitHub 上创建一个新的仓库
+        </div>
+        
+        <div class="step">
+            <span class="step-number">2</span> 将您的旅行行程文件（index.html, print.html, route_map.html 等）上传到该仓库
+        </div>
+        
+        <div class="step">
+            <span class="step-number">3</span> 在仓库的 Settings 页面中，找到 GitHub Pages 部分
+        </div>
+        
+        <div class="step">
+            <span class="step-number">4</span> 从 Source 下拉菜单中选择 master 或 main 分支
+        </div>
+        
+        <div class="step">
+            <span class="step-number">5</span> 点击 Save，GitHub 会自动部署您的网站
+        </div>
+        
+        <div class="step">
+            <span class="step-number">6</span> 几分钟后，您可以通过类似这样的链接访问您的网站：
+            <pre>https://your-username.github.io/your-repository-name/index.html</pre>
+        </div>
+    </div>
+    
+    <div class="warning">
+        ⚠️ 重要提示：
+        <ul>
+            <li>使用ngrok或localtunnel生成的链接仅在您的本地服务器运行期间有效</li>
+            <li>这些工具生成的链接可能会在每次重新启动时更改（ngrok提供付费版本可获取固定域名）</li>
+            <li>分享的链接将直接暴露您本地服务器上的内容，请确保不会意外分享敏感信息</li>
+            <li>如需长期稳定访问，建议使用GitHub Pages等静态网站托管服务</li>
+        </ul>
+    </div>
+    
+    <div class="tip">
+        💡 提示：当您使用这些方法生成外网链接后，他人可以通过以下链接访问不同页面：
+        <ul>
+            <li>主页面：[外网链接]/index.html</li>
+            <li>打印版本：[外网链接]/print.html</li>
+            <li>路线地图：[外网链接]/route_map.html</li>
+        </ul>
+    </div>
+</body>
+</html>

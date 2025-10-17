@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片预览测试</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .test-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .image-item {
+            text-align: center;
+        }
+        .image-name {
+            margin-top: 10px;
+            color: #666;
+        }
+        .success-note {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0f9ff;
+            border: 1px solid #91d5ff;
+            border-radius: 8px;
+            color: #1890ff;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>本地图片预览测试</h1>
+    
+    <div class="image-container">
+        <div class="image-item">
+            <img src="https://picsum.photos/id/1076/800/400" alt="集美集影视文创园" class="test-image">
+            <div class="image-name">集美集影视文创园</div>
+        </div>
+        
+        <div class="image-item">
+            <img src="https://picsum.photos/id/1031/800/400" alt="集美学村" class="test-image">
+            <div class="image-name">集美学村</div>
+        </div>
+        
+        <div class="image-item">
+            <img src="https://picsum.photos/id/1040/800/400" alt="大社" class="test-image">
+            <div class="image-name">大社</div>
+        </div>
+    </div>
+    
+    <div class="success-note">
+        <p>如果您能看到上面的三张图片，说明使用picsum.photos的图片链接在本地可以正常预览。</p>
+        <p>请直接在浏览器中打开index.html和print.html文件，现在这些文件中的图片也应该能正常显示了。</p>
+    </div>
+</body>
+</html>

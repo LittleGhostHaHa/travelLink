@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厦门集美精选游玩路线图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .route-line {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border: 3px solid #ff6b6b;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            border-top: none;
+            border-right: none;
+        }
+        
+        .location-point {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .point-1 {
+            top: 15%;
+            left: 15%;
+            background: #52c41a;
+        }
+        
+        .point-2 {
+            top: 40%;
+            left: 40%;
+            background: #1890ff;
+        }
+        
+        .point-3 {
+            top: 65%;
+            left: 65%;
+            background: #ff4d4f;
+        }
+        
+        .point-4 {
+            top: 15%;
+            left: 15%;
+            background: #722ed1;
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+        }
+        
+        .location-label {
+            position: absolute;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .label-1 {
+            top: 5%;
+            left: 25%;
+        }
+        
+        .label-2 {
+            top: 35%;
+            left: 50%;
+        }
+        
+        .label-3 {
+            top: 75%;
+            left: 75%;
+        }
+        
+        .step-title {
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+        
+        .step-desc {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .print-info {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e8;
+            border-radius: 8px;
+            color: #237804;
+            font-size: 14px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .route-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+            
+            .print-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+        <div class="map-container">
+            <div class="route-line"></div>
+            
+            <div class="location-point point-1">1</div>
+            <div class="location-point point-2">2</div>
+            <div class="location-point point-3">3</div>
+            <div class="location-point point-4">🏁</div>
+            
+            <div class="location-label label-1">集美集影视文创园</div>
+            <div class="location-label label-2">集美学村</div>
+            <div class="location-label label-3">大社</div>
+        </div>
+    </body>
+</html>
